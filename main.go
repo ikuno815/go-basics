@@ -1,11 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+
+	"github.com/joho/godotenv"
+)
 
 func main() {
-	fmt.Println("hola el mundo")
-	sl := []int{1, 2, 3}
-	if len(sl) > 2 {
-		fmt.Println("unreachable code")
-	}
+	godotenv.Load()
+	fmt.Println(os.Getenv("GO_ENV"))
 }
