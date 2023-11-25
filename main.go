@@ -110,4 +110,33 @@ func main() {
 	//2回のdereferenceを使って値を書き換えることもできる
 	**pp1 = 10
 	fmt.Printf("value of ui1: %v\n", ui1)
+
+	//shadowingについて
+
+	//okとresultという変数を用意し、それぞれtrueとAという初期値を代入する
+	//下記を実行すると、B,Aがprintされる。:=はif文の中のスコープでのみ適用されるから。
+	// ok, result := true, "A"
+	// fmt.Printf("memory address of result: %p\n", &result) //119行目と122行目のresultは別物
+	// if ok {
+	// 	result := "B"
+	// 	fmt.Printf("memory address of result: %p\n", &result)
+	// 	println(result)
+	// } else {
+	// 	result := "C"
+	// 	println(result)
+	// }
+	// println(result)
+
+	//スコープの外と中で同じresultを共有したい場合は、:を外す
+	ok, result := true, "A"
+	fmt.Printf("memory address of result: %p\n", &result) //119行目と122行目のresultの番地が一緒
+	if ok {
+		result = "B"
+		fmt.Printf("memory address of result: %p\n", &result)
+		println(result)
+	} else {
+		result = "C"
+		println(result)
+	}
+	println(result)
 }
