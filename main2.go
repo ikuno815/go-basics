@@ -93,4 +93,37 @@ func main() {
 	s5[3] = 9
 	fmt.Printf("s5: %v %v %v\n", s5, len(s5), cap(s5)) //s5のindex3には9が反映される
 	fmt.Printf("fs6: %v %v %v\n", fs6, len(fs6), cap(fs6))
+
+	//map: keyと値をテーブルとして管理できるもの
+	//定義方法：mapというkeywordを使って、まず[]のところでkeyの型を指定する
+	//右側には値を型を指定する
+	//ここではkeyがstring型で、値がintの型のmapを定義している
+	var m1 map[string]int
+	//:=でも定義できるが、その場合は空の{}で空の値を代入する必要がある
+	m2 := map[string]int{}
+	fmt.Printf("%v %v \n", m1, m1 == nil) //map[] nil
+	fmt.Printf("%v %v \n", m2, m2 == nil) //map[] nilではない
+
+	//m2のmapに値を設定してみる
+	m2["A"] = 10
+	m2["B"] = 20
+	m2["C"] = 0
+	fmt.Printf("%v %v %v\n", m2, len(m2), m2["A"])
+
+	//deleteを使って要素を削除してみる
+	delete(m2, "A") //Aのkeywordに紐づいた要素を削除する
+	fmt.Printf("%v %v %v\n", m2, len(m2), m2["A"])
+
+	//存在する0("C"の値)と存在しない0の識別方法
+	v, ok := m2["A"]             //返り値の２番目にok(true,false)が返ってくる
+	fmt.Printf("%v %v\n", v, ok) //0 false
+	v, ok = m2["C"]
+	fmt.Printf("%v %v\n", v, ok) //0 true
+
+	//mapの要素をfor文で取り出す方法
+	//rangeを使うことができて、mapの要素を1個1個取り出してfor文を回してくれる
+	//mapの注意点：内部でhashmapを使っているのでこのforで取り出す順番が必ず同じ順番になるとは限らない！
+	for k, v := range m2 {
+		fmt.Printf("%v %v\n", k, v)
+	}
 }
